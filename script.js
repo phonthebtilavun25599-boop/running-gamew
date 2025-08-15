@@ -122,3 +122,26 @@ function gameLoop() {
 }
 
 gameLoop();
+
+function createObstacle() {
+    let size = Math.random() * 30 + 20 + level * 5;
+    let yPos = Math.random() * (canvas.height - size); 
+    obstacles.push({
+        x: canvas.width,
+        y: yPos,
+        width: size,
+        height: size,
+        color: '#ff4500',
+        dy: (Math.random() * 2 + 1) * (Math.random() < 0.5 ? 1 : -1) 
+    });
+}
+obstacles.forEach(obs => {
+    obs.x -= speed;
+    obs.y += obs.dy;
+
+    
+    if (obs.y < 0 || obs.y + obs.height > canvas.height) {
+        obs.dy *= -1;
+    }
+});
+
